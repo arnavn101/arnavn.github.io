@@ -324,7 +324,32 @@ http://www.templatemo.com/tm-468-onetel
   padding-left: 80px;
   text-align:left;
 }
+.upload-btn-wrapper {
+  position: relative;
+  overflow: hidden;
+  display: inline-block;
+}
 
+.btn {
+  border: 2px solid gray;
+  color: black;
+  background-color: white;
+  padding: 8px 20px;
+  border-radius: 8px;
+  font-size: 20px;
+  font-weight: bold;
+}
+
+.upload-btn-wrapper input[type=file] {
+  font-size: 100px;
+  position: absolute;
+  left: 0;
+  top: 0;
+  opacity: 0;
+}
+#upload-btn-wrapper {
+    display: none;
+}
         </style>
        
     </head>
@@ -336,6 +361,13 @@ http://www.templatemo.com/tm-468-onetel
 		font-weight: bold;
   }
 </style>
+<script>
+	function showDiv(divId, element)
+{
+    document.getElementById(divId).style.display = element.value == "Attachment" ? 'block' : 'none';
+}
+
+</script>
     <body>
     <center>  
 
@@ -361,7 +393,7 @@ http://www.templatemo.com/tm-468-onetel
 </div>    
 
     	<div>
-    <form action = "http://167.172.205.141:5000" method = "POST">
+    <form action = "http://167.172.205.141:5000" method = "POST" enctype="multipart/form-data">
   <div class="form-group">
    <input type="hidden" id="custId" name="formIdentify" value="notes">
     <br><br><br><br><br><br><br><br><br>
@@ -372,18 +404,30 @@ http://www.templatemo.com/tm-468-onetel
   <br><br>
   <div class="form-group">
     <label for="exampleFormControlSelect1" style="font-size: 45px">Type Of Import:</label>
-    <select rows="3" class="form-control" id="exampleFormControlSelect1" name="choice" style="width: 300px; height: 50px; font-size: 25px; ">
+    <select rows="3" class="form-control" onchange="showDiv('upload-btn-wrapper', this)" id="exampleFormControlSelect1" name="choice" style="width: 300px; height: 50px; font-size: 25px; ">
       <option style="font-size: 25px"> </option>
       <option style="font-size: 25px">Website</option>
       <option style="font-size: 25px">Audio</option>
       <option style="font-size: 25px">Image</option>
+      <option value = "Attachment" style="font-size: 25px">Attachment</option>
+
     </select>
   </div>
   <br><br>
+
+  <div id ="upload-btn-wrapper" class="upload-btn-wrapper">
+  <button class="btn">Upload a file</button>
+  <input type="file" name="myfile"/>
+</div>
+<br><br>
   <div class="form-group">
     <label  style="font-size: 45px"for="exampleFormControlTextarea1">Link:</label>
     <textarea class="form-control" name = "URL" id="exampleFormControlTextarea1" rows="1" style="width: 600px; height: 50px; font-size: 25px"></textarea>
   </div>
+  
+
+
+
 </form>
 
 
@@ -391,6 +435,7 @@ http://www.templatemo.com/tm-468-onetel
 <button style="font-size:25px; height: 70px; width: 270px font-weight: bold;" href="#" class="myButton" type="submit" id="empFormSubmitBtn" onclick="">Summarize</button>
 
 <br><br><br><br><br><br><br><br>  
+
 <div class="copyright">
 <div class="container">
 <div class="row">
